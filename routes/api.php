@@ -18,14 +18,21 @@ use Illuminate\Http\Request;
 // });
 
 Route::group([
-
     'middleware' => 'api',
-
 ], function ($router) {
-
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+});
 
+
+Route::group([
+    'prefix' => 'users',
+], function ($router) {
+    Route::post('/', 'UserController@store');
+    Route::get('/','UserController@index');
+    Route::get('/{user_id}','UserController@show');
+    Route::delete('/{user_id}','UserController@destroy');
+    Route::put('/{user_id}','UserController@update');
 });
