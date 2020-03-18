@@ -36,3 +36,9 @@ Route::group([
     Route::delete('/{user_id}','UserController@destroy');
     Route::put('/{user_id}','UserController@update');
 });
+
+Route::group([
+    'middleware' => 'auth:api'
+],function($router){
+    Route::post('/forgotPassword','UserController@forgotPassword');
+});

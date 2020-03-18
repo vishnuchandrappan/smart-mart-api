@@ -2,7 +2,7 @@
 
 namespace App\Http\Responses;
 
-use Illuminate\contracts\Support\Responsable;
+use Illuminate\Contracts\Support\Responsable;
 
 class SuccessResponse implements Responsable{
     protected $message;

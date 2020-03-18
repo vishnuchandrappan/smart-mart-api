@@ -2,7 +2,7 @@
 
 namespace App\Http\Responses;
 
-use Illuminate\contracts\Support\Responsable;
+use Illuminate\Contracts\Support\Responsable;
 
 class SuccessWithData implements Responsable{
     protected $data,$response_code;
@@ -17,7 +17,7 @@ class SuccessWithData implements Responsable{
     {
         return response()->json([
             'status' => 'ok',
-            'message' => $this->data
+            'data' => $this->data
         ],$this->response_code);
     }
 }
