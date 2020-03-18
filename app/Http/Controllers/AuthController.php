@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Responses\ErrorResponse;
 use App\Http\Responses\SuccessResponse;
 use App\Http\Responses\SuccessWithData;
 use App\Http\Responses\SuccessWithToken;
 use Illuminate\Http\Request;
+
+use App\User;
 
 class AuthController extends Controller
 {
@@ -15,8 +18,11 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['login']]);
     }
 
-    public function login()
+    public function login(LoginRequest $request)
     {
+        if (User::where('email', $request->email)->first()->phone_verified_at == null) {
+            return new ErrorResponse("Account Not Verified", 402);
+        }
         $credentials = request(['email', 'password']);
 
         if (!$token = auth()->attempt($credentials)) {

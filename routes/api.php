@@ -24,6 +24,7 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+    Route::post('/verifyOTP', 'UserController@verify');
 });
 
 
@@ -31,14 +32,14 @@ Route::group([
     'prefix' => 'users',
 ], function ($router) {
     Route::post('/', 'UserController@store');
-    Route::get('/','UserController@index');
-    Route::get('/{user_id}','UserController@show');
-    Route::delete('/{user_id}','UserController@destroy');
-    Route::put('/{user_id}','UserController@update');
+    Route::get('/', 'UserController@index');
+    Route::get('/{user_id}', 'UserController@show');
+    Route::delete('/{user_id}', 'UserController@destroy');
+    Route::put('/{user_id}', 'UserController@update');
 });
 
 Route::group([
     'middleware' => 'auth:api'
-],function($router){
-    Route::post('/forgotPassword','UserController@forgotPassword');
+], function ($router) {
+    Route::post('/forgotPassword', 'UserController@forgotPassword');
 });
