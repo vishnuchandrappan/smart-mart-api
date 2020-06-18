@@ -14,17 +14,16 @@ trait OtpTrait
         $number = config('app.twilio')['TWILIO_NUMBER'];
 
         $client = new Client($sid, $token);
-        try{
+        try {
             $client->messages->create(
                 $phone,
                 array(
                     'from' => $number,
-                    'body' => $message." : ".$otp
+                    'body' => $message . " : " . $otp
                 )
-                );
-        }
-        catch(\Exception $e){
-            return new ErrorResponse('OTP could not be sent',500);
+            );
+        } catch (\Exception $e) {
+            return new ErrorResponse('OTP could not be sent', 500);
         }
     }
 }

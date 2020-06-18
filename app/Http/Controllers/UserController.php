@@ -38,7 +38,7 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($request->user_id);
         } catch (\Exception $e) {
-            return new ErrorResponse("User not found", 401);
+            return new ErrorResponse("User not found", 404);
         }
 
         if (Otp::digits(6)->expiry(15)->check($request['otp'], $user->remember_token)) {
@@ -66,7 +66,7 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($user_id);
         } catch (\Exception $e) {
-            return new ErrorResponse("User not found", 401);
+            return new ErrorResponse("User not found", 404);
         }
         return new SuccessWithData($user);
     }
@@ -76,7 +76,7 @@ class UserController extends Controller
         try {
             User::findOrFail($user_id)->delete();
         } catch (\Exception $e) {
-            return new ErrorResponse("User not found", 401);
+            return new ErrorResponse("User not found", 404);
         }
         return new SuccessResponse("User Deleted");
     }
@@ -86,7 +86,7 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($user_id)->update($request->except(['email', 'phone_number', 'password']));
         } catch (\Exception $e) {
-            return new ErrorResponse("User not found", 401);
+            return new ErrorResponse("User not found", 404);
         }
         return new SuccessResponse("Details Updated");
     }
@@ -120,4 +120,5 @@ class UserController extends Controller
 
         return $data;
     }
+
 }
