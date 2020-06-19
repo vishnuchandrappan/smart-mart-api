@@ -15,7 +15,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'adminLogin']]);
     }
 
     public function login(LoginRequest $request)
@@ -29,7 +29,12 @@ class AuthController extends Controller
             return new ErrorResponse("Unauthorized", 401);
         }
 
-        return new SuccessWithToken($token);
+        $user = User::where('email', $request->email)->get()[0];
+
+        $data = [];
+        $data['token'] = $token;
+        $data['user'] = $user;
+        return new SuccessWithData($data);
     }
 
     public function me()
@@ -48,5 +53,25 @@ class AuthController extends Controller
     public function refresh()
     {
         return new SuccessWithToken(auth()->refresh());
+    }
+
+    public function adminLogin(LoginRequest $request)
+    {
+        $user = User::where('email', $request->email)->get()[0];
+
+        if ($user->user_type !== '1') {
+            return new ErrorResponse('Unauthenticated',403);
+        }
+
+        $credentials = request(['email', 'password']);
+
+        if (!$token = auth()->attempt($credentials)) {
+            return new ErrorResponse("Unauthorized", 401);
+        }
+
+        $data = [];
+        $data['token'] = $token;
+        $data['user'] = $user;
+        return new SuccessWithData($data);
     }
 }

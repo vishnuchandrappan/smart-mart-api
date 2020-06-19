@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewSuperMarketRequest;
+use App\Http\Responses\ErrorResponse;
 use App\Http\Responses\SuccessResponse;
+use App\Http\Responses\SuccessWithData;
 use Illuminate\Http\Request;
 
 class SuperMarketController extends Controller
@@ -24,6 +26,15 @@ class SuperMarketController extends Controller
     {
         auth()->user()->superMarket->update($request->all());
         return new SuccessResponse("Details Updated");
+    }
+
+    public function show()
+    {
+        $data = auth()->user()->superMarket;
+        if(!$data){
+            return new ErrorResponse("No results found",404);
+        }
+        return new SuccessWithData($data);
     }
 
 

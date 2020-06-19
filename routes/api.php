@@ -39,7 +39,17 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth:api'
+    // 'middleware' => 'auth:api'
 ], function ($router) {
     Route::post('/forgotPassword', 'UserController@forgotPassword');
 });
+
+Route::group([
+    'middleware' => 'auth:api',
+    'prefix' => 'admin'
+], function ($router) {
+    Route::get('/superMarket', 'SuperMarketController@show');
+    Route::post('/superMarket', 'SuperMarketController@store');
+});
+
+Route::post('/admin/login', 'AuthController@adminLogin');
