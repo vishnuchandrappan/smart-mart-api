@@ -41,4 +41,10 @@ class User extends Authenticatable implements JWTSubject{
     public function getJWTCustomClaims(){
         return [];
     }
+
+
+    public function superMarket()
+    {
+        return $this->hasOne('App\SuperMarket');
+    }
 }
