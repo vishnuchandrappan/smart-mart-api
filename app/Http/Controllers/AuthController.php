@@ -72,6 +72,7 @@ class AuthController extends Controller
         $data = [];
         $data['token'] = $token;
         $data['user'] = $user;
+        $data['expiresIn'] = auth()->factory()->getTTL() * 60;
         return new SuccessWithData($data);
     }
 }
