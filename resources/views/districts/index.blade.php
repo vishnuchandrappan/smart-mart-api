@@ -7,11 +7,23 @@
     Districts
 </div>
 <div class="container">
-    @foreach ($districts as $district)
-    <a class="list-group" href="/districts/{{$district->id}}">
-        <span class="list-group-item">{{$district->name}}</span>
-    </a>
-    @endforeach
+    <div class="list-group grid-1">
+
+        @foreach ($districts as $district)
+        <div class="list-group-item flex-1">
+            <span>{{$district->name}}</span>
+            <div class="buttons">
+                <a href="/districts/{{$district->id}}" class="btn btn-success">View</a>
+                <a href="/districts/{{$district->id}}/edit" class="btn btn-warning">Edit</a>
+                <form action="/districts/{{$district->id}}" method="POST" class="d-inline">
+                    @csrf
+                    @method('delete')
+                    <input type="submit" value="DELETE" class="btn btn-info">
+                </form>
+            </div>
+        </div>
+        @endforeach
+    </div>
     <a href="/districts/new" class="btn btn-success float-right">Add New</a>
 </div>
 @else

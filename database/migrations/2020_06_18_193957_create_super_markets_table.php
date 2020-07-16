@@ -17,7 +17,7 @@ class CreateSuperMarketsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('address')->nullable();
-            $table->char('district',2);
+            $table->bigInteger('district_id');
             $table->char('phone_number', 12);
             $table->string('location')->nullable();
             $table->bigInteger('user_id');

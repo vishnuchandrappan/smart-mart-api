@@ -29,4 +29,25 @@ class DistrictController extends Controller
         $district = District::find($id);
         return view('districts.show', compact('district'));
     }
+
+    public function webEdit($id)
+    {
+        $district = District::find($id);
+        return view('districts.edit', compact('district'));
+    }
+
+    public function webUpdate($id)
+    {
+        District::find($id)->update([
+            'name' => request('name')
+        ]);
+
+        return redirect('/districts/' . $id);
+    }
+
+    public function webDelete($id)
+    {
+        District::find($id)->delete();
+        return back();
+    }
 }

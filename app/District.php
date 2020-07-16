@@ -8,13 +8,8 @@ class District extends Model
 {
     protected $fillable = ['name'];
 
-    public function theaters()
+    public function superMarkets()
     {
-        return $this->hasMany('App\Theater')->orderBy('id');
-    }
-
-    public function movies()
-    {
-        return $this->theaters()->with('movies');
+        return $this->hasMany('App\SuperMarket');
     }
 }

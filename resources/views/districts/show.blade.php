@@ -9,70 +9,35 @@
 
 <div class="container district-options">
     <div class="theaters">
-        <h3>Theaters</h3>
-        @if(count($district->theaters) > 0)
+        <h3>Super Markets</h3>
+        @if(count($district->superMarkets) > 0)
         <div class="list-group">
-            @foreach ($district->theaters()->with('selectedMovies')->get() as $theater)
+            @foreach ($district->superMarkets as $superMarket)
             <div class="theater">
                 <div class="list-group-item details">
                     <span>
-                        {{$theater->name}}
+                        {{$superMarket->name}}
                     </span>
                     <div class="btn-container">
-                        <a href="/theaters/{{$theater->id}}" class="btn btn-info">View</a>
-                        <a href="/theaters/{{$theater->id}}/edit" class="btn btn-info">Edit</a>
-                        <a href="/theaters/{{$theater->id}}/delete" class="btn btn-danger">Delete</a>
+                        <a href="/super-markets/{{$superMarket->id}}" class="btn btn-info">View</a>
+                        <form class="d-inline p-0" action="/super-markets/{{$superMarket->id}}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
                     </div>
                 </div>
-                @if(count($theater->movies) > 0)
-                <h4>Movies</h4>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Director</th>
-                            <th scope="col">Release Date</th>
-                            <th scope="col">Options</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($theater->movies->take(3) as $movie)
-                        <tr>
-                            <th scope="row">{{$movie->id}}</th>
-                            <td>{{$movie->name}}</td>
-                            <td>{{$movie->director}}</td>
-                            <td>{{$movie->release_date}}</td>
-                            <td>
-                                <a href="/movies/{{$movie->id}}" class="btn btn-warning">
-                                    View
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-                @if(count($theater->movies) === 3)
-                <div>
-                    <a href="#" class="btn btn-warning float-right">View More</a>
-                </div>
-                @endif
-                @endif
             </div>
             @endforeach
         </div>
         <div class="w-100">
-            <a href="/districts/1/theaters/new" class="btn btn-success float-right">Add New</a>
+            <a href="/districts/1/super-markets/new" class="btn btn-success float-right">Add New</a>
         </div>
         @else
-        <div>No Theaters Found !</div>
-        <a href="/districts/{{$district->id}}/theaters/new" class="btn btn-success">Add New</a>
+        <div>No Super Markets Found !</div>
+        <a href="/districts/{{$district->id}}/super-markets/new" class="btn btn-success">Add New</a>
         @endif
     </div>
-</div>
-
-<div class="navigation btn-container">
-    <button class="btn btn-warning" onclick="goBack()"> &lt;&lt; back</button>
 </div>
 
 @endsection

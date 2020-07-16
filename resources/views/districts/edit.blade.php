@@ -5,15 +5,17 @@
     Add New District
 </div>
 <div class="container">
-    <form action="/districts" method="POST">
+    <form class="login" action="/districts/{{$district->id}}" method="POST">
         @csrf
+        @method('PUT')
         <div class="form-group">
             <label for="email">Name</label>
-            <input type="text" name="name" placeholder="Eg: Alappuzha" required class="form-control">
+            <input type="text" name="name" value="{{$district->name}}" placeholder="Eg: Alappuzha" required
+                class="form-control">
         </div>
 
         <div class="btn-container">
-            <button type="submit" class="btn btn-info">Add</button>
+            <button type="submit" class="btn btn-info">Save Changes</button>
         </div>
 
     </form>

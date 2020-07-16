@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Movie Ticket</title>
+    <title>Smart Mart</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="/css/app.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
     <script src="/js/app.js"></script>
 </head>

@@ -121,4 +121,18 @@ class UserController extends Controller
         return $data;
     }
 
+
+    // web
+
+    public function webIndex()
+    {
+        $users = User::all();
+        return view('users.index', compact('users'));
+    }
+
+    public function webDestroy($id)
+    {
+        User::find($id)->delete();
+        return back();
+    }
 }

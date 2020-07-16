@@ -19,4 +19,9 @@ class SuperMarket extends Model
     {
         return $this->hasMany('App\Category');
     }
+
+    public function district()
+    {
+        return $this->belongsTo('App\District');
+    }
 }
