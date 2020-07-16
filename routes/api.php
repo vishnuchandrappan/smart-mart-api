@@ -53,3 +53,7 @@ Route::group([
 });
 
 Route::post('/admin/login', 'AuthController@adminLogin');
+
+Route::group(['prefix' => 'items'], function () {
+    Route::get('/', 'ItemController@index');
+});

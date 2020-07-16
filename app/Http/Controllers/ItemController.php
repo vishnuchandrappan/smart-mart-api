@@ -17,15 +17,20 @@ class ItemController extends Controller
     public function __construct()
     {
         // $this->middleware('isAdmin');
-        $this->superMarket = auth()->user()->superMarket;
+        // $this->superMarket = auth()->user()->superMarket;
+    }
+
+    public function index()
+    {
+        # code...
     }
 
     public function create(NewItemRequest $request)
     {
-        $category = $this->validateCategory($request->category_id);
-        $category->create($request->only([
-            'name', 'unit_price', 'discount'
-        ]));
+        // $category = $this->validateCategory($request->category_id);
+        // $category->create($request->only([
+        //     'name', 'unit_price', 'discount'
+        // ]));
 
         return new SuccessResponse('Item Created');
     }
