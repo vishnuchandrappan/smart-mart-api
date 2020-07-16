@@ -18,7 +18,8 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->string('unit_price');
             $table->float('discount')->default(0);
-            $table->bigInteger('category_id');
+            $table->bigInteger('label_id');
+            $table->bigInteger('super_market_id');
             $table->timestamps();
         });
     }

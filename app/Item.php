@@ -12,4 +12,9 @@ class Item extends Model
     {
         return $this->belongsTo('App\Category');
     }
+
+    public function superMarket()
+    {
+        return $this->belongsTo('App\SuperMarket');
+    }
 }

@@ -15,13 +15,18 @@ class SuperMarket extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function categories()
-    {
-        return $this->hasMany('App\Category');
-    }
-
     public function district()
     {
         return $this->belongsTo('App\District');
+    }
+
+    public function labels()
+    {
+        return $this->hasManyThrough('App\Label', 'App\Item');
+    }
+
+    public function items()
+    {
+        return $this->hasMany('Items');
     }
 }
