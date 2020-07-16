@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\District;
+use App\Http\Responses\SuccessResponse;
 
 class DistrictController extends Controller
 {
@@ -50,4 +51,15 @@ class DistrictController extends Controller
         District::find($id)->delete();
         return back();
     }
+
+
+    // API
+    /**
+
+    public function apiShow($id)
+    {
+        return new SuccessResponse('');
+    }
+
+    */
 }

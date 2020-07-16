@@ -27,6 +27,16 @@ class SuperMarket extends Model
 
     public function items()
     {
-        return $this->hasMany('Items');
+        return $this->hasMany('App\Item');
+    }
+
+    public function outOfStock()
+    {
+        return $this->items()->where('stock', 0);
+    }
+
+    public function lowStock()
+    {
+        return $this->items()->where('stock', '<=', 100)->where('stock', '>', 0);
     }
 }

@@ -17,4 +17,9 @@ class Item extends Model
     {
         return $this->belongsTo('App\SuperMarket');
     }
+
+    public function stocks()
+    {
+        return $this->hasMany('App\Stock')->orderBy('id', 'desc');
+    }
 }

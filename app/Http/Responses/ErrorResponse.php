@@ -4,10 +4,11 @@ namespace App\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 
-class ErrorResponse implements Responsable{
-    protected $message,$response_code;
+class ErrorResponse implements Responsable
+{
+    protected $message, $response_code;
 
-    public function __construct($message,$response_code = 400)
+    public function __construct($message, $response_code = 400)
     {
         $this->message = $message;
         $this->response_code = $response_code;
@@ -16,8 +17,8 @@ class ErrorResponse implements Responsable{
     public function toResponse($request)
     {
         return response()->json([
-            'status' => 'ok',
+            'status' => 'error',
             'message' => $this->message
-        ],$this->response_code);
+        ], $this->response_code);
     }
 }

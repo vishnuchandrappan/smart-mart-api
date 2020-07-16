@@ -54,6 +54,20 @@ Route::group([
 
 Route::post('/admin/login', 'AuthController@adminLogin');
 
-Route::group(['prefix' => 'items'], function () {
+Route::group(['prefix' => 'items', 'middleware' => 'auth:api'], function () {
     Route::get('/', 'ItemController@index');
+    Route::post('/', 'ItemController@create');
+    Route::put('/{id}', 'ItemController@update');
+    Route::delete('/{id}', 'ItemController@destroy');
+    Route::get('/outOfStock', 'ItemController@outOfStock');
+    Route::get('/lowStock', 'ItemController@lowStock');
+});
+
+Route::group(['prefix' => 'districts'], function () {
+    Route::get('/{id}/superMarkets', 'DistrictController@apiShow');
+});
+
+
+Route::group(['prefix' => 'items'], function () {
+    Route::get('/{id}', 'ItemController@stocks');
 });

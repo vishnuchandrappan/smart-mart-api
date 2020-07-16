@@ -24,10 +24,10 @@ class UpdateItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'item_id' => 'required|exists:items,id',
             'name' => 'string',
-            'unit_price' => 'string',
-            'discount' => 'float'
+            'label_id' => 'string|exists:labels,id',
+            'unit_price' => 'min:0',
+            'discount' => 'min:0',
         ];
     }
 }

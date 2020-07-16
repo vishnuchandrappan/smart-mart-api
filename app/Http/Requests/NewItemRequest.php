@@ -25,9 +25,9 @@ class NewItemRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'label_id' => 'required|exists:labels,id',
             'unit_price' => 'required',
-            'discount' => 'float',
-            'category_id' => 'required|exists:categories,id'
+            'discount' => 'min:0',
         ];
     }
 }
