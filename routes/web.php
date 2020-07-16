@@ -11,6 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', 'DistrictController@index');
+
+Route::group(['prefix' => 'districts'], function () {
+    Route::get('/', 'DistrictController@index');
+    Route::post('/', 'DistrictController@store');
+    Route::get('/new', 'DistrictController@create');
+    Route::get('/{id}', 'DistrictController@show');
+    Route::get('/{id}/theaters/new', 'TheaterController@new');
+    Route::post('/{id}/theaters', 'TheaterController@webStore');
 });
