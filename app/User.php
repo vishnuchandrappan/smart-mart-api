@@ -7,7 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject{
+class User extends Authenticatable implements JWTSubject
+{
     use Notifiable;
 
     /**
@@ -16,8 +17,10 @@ class User extends Authenticatable implements JWTSubject{
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone_number'
+        'name', 'email', 'password','phone_number','user_type','phone_verified_at'
     ];
+
+    // protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -29,7 +32,8 @@ class User extends Authenticatable implements JWTSubject{
     ];
 
 
-    public function getJWTIdentifier(){
+    public function getJWTIdentifier()
+    {
         return $this->getKey();
     }
 
@@ -38,7 +42,8 @@ class User extends Authenticatable implements JWTSubject{
      *
      * @return array
      */
-    public function getJWTCustomClaims(){
+    public function getJWTCustomClaims()
+    {
         return [];
     }
 

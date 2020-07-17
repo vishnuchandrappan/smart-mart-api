@@ -25,9 +25,10 @@ class NewSuperMarketRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'address' => 'string',
+            'address' => 'string|required',
             'phone_number' => 'required|max:12|min:10',
             'location' => 'string',
+            'district_id' => 'required|exists:districts,id'
         ];
     }
 }

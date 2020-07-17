@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignupRequest extends FormRequest
+class UpdateStockRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,8 @@ class SignupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'phone_number' => 'required|max:10|unique:users',
-            'password' => 'required|min:8|confirmed'
+            'stock_id' => 'required|exists:stocks,id',
+            'stock' => 'required'
         ];
     }
 }

@@ -21,13 +21,23 @@ class SuperMarketController extends Controller
 
     public function store(NewSuperMarketRequest $request)
     {
+        if (auth()->user()->superMarket) {
+            return new ErrorResponse('User Already exists');
+        }
+
         auth()->user()->superMarket()->create($request->all());
         return new SuccessResponse('Super Market Created');
     }
 
-    public function update(NewSuperMarketRequest $request)
+    public function update($id, NewSuperMarketRequest $request)
     {
-        auth()->user()->superMarket->update($request->all());
+        $superMarket = SuperMarket::find($id);
+
+        if (auth()->user()->superMarket->id !== $superMarket->id) {
+            return new ErrorResponse('Unauthorized', 401);
+        }
+
+        $superMarket->update($request->all());
         return new SuccessResponse("Details Updated");
     }
 
@@ -38,6 +48,18 @@ class SuperMarketController extends Controller
             return new ErrorResponse("No results found", 404);
         }
         return new SuccessWithData($data);
+    }
+
+    public function getLabels()
+    {
+        $labels = auth()->user()->superMarket->labels;
+        return new SuccessWithData($labels);
+    }
+
+    public function getItems($id)
+    {
+        $items = auth()->user()->superMarket->itemsInLabel($id)->get();
+        return new SuccessWithData($items);
     }
 
 

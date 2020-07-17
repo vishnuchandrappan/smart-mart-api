@@ -22,4 +22,9 @@ class Item extends Model
     {
         return $this->hasMany('App\Stock')->orderBy('id', 'desc');
     }
+
+    public function user()
+    {
+        return $this->superMarket()->with('user');
+    }
 }

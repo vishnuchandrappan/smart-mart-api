@@ -22,7 +22,7 @@ class SuperMarket extends Model
 
     public function labels()
     {
-        return $this->hasManyThrough('App\Label', 'App\Item');
+        return $this->belongsToMany('App\Label', 'items')->distinct();
     }
 
     public function items()
@@ -38,5 +38,15 @@ class SuperMarket extends Model
     public function lowStock()
     {
         return $this->items()->where('stock', '<=', 100)->where('stock', '>', 0);
+    }
+
+    public function itemsInLabel($id)
+    {
+        return $this->items()->where('label_id', $id);
+    }
+
+    public function validItemsInLabel($id)
+    {
+        return $this->itemsInLabel($id)->where('stock', '>', 0);
     }
 }

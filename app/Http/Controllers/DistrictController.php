@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\District;
 use App\Http\Responses\SuccessResponse;
+use App\Http\Responses\SuccessWithData;
 
 class DistrictController extends Controller
 {
@@ -61,5 +62,10 @@ class DistrictController extends Controller
         return new SuccessResponse('');
     }
 
-    */
+     */
+
+    public function apiIndex()
+    {
+        return new SuccessWithData(District::all());
+    }
 }
