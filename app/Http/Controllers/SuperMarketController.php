@@ -62,6 +62,16 @@ class SuperMarketController extends Controller
         return new SuccessWithData($items);
     }
 
+    public function changeState()
+    {
+        $sm = auth()->user()->superMarket;
+        $sm->update([
+            'is_opened' => !$sm->is_opened
+        ]);
+
+        return new SuccessResponse('Changes Saved');
+    }
+
 
     // WEB
 

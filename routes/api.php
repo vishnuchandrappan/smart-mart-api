@@ -51,6 +51,7 @@ Route::group([
     Route::get('/', 'SuperMarketController@show');
     Route::post('/', 'SuperMarketController@store');
     Route::put('/{id}', 'SuperMarketController@update');
+    Route::post('/changeState', 'SuperMarketController@changeState');
 });
 
 Route::post('/admin/login', 'AuthController@adminLogin');
