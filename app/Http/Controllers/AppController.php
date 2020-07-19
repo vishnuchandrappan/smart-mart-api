@@ -8,6 +8,7 @@ use App\Item;
 use Illuminate\Http\Request;
 use App\SuperMarket;
 use App\Order;
+use App\OrderItems;
 
 class AppController extends Controller
 {
@@ -60,5 +61,25 @@ class AppController extends Controller
         }
 
         return new SuccessResponse("Added");
+    }
+
+    public function cart()
+    {
+        $a = Order::first();
+        $b = OrderItems::where('order_id', $a->id)->with('item')->get();
+
+        $data['order'] = $a;
+        $data['items'] = $b;
+
+        return new SuccessWithData($data);
+    }
+
+    public function remove(Request $request)
+    {
+        $a = Order::find($request->order_id);
+
+        $a->delete();
+
+        return new SuccessResponse('items cleared');
     }
 }

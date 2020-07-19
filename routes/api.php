@@ -90,6 +90,8 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/getSuperMarkets', 'AppController@one');
     Route::get('/getSuperMarket', 'AppController@two');
     Route::get('/getItems', 'AppController@three');
-    Route::get('/getItem','AppController@four');
-    Route::post('/addToCard','AppController@five');
+    Route::get('/getItem', 'AppController@four');
+    Route::post('/addToCard', 'AppController@five');
+    Route::get('/cart', 'AppController@cart');
+    Route::post('/removeItems','AppController@remove');
 });
