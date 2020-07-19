@@ -84,3 +84,12 @@ Route::group(['prefix' => 'labels', 'middleware' => 'auth:api'], function () {
 
 
 Route::post('/createAdmin', 'AuthController@createAdmin');
+
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/getSuperMarkets', 'AppController@one');
+    Route::get('/getSuperMarket', 'AppController@two');
+    Route::get('/getItems', 'AppController@three');
+    Route::get('/getItem','AppController@four');
+    Route::post('/addToCard','AppController@five');
+});
